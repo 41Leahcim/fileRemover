@@ -1,27 +1,41 @@
 #include <iostream>
 #include <filesystem>
 
+namespace fs = std::filesystem;
+
+bool fileRemover(fs::directory_entry map) {
+    if(!map.is_directory()){
+        return fs::remove(map);
+    }
+	try {
+		for (const fs::directory_entry& entry : fs::directory_iterator(map)) {
+			if (!entry.is_directory()) {
+                fs::remove(entry);
+			}else{
+                if(map != entry){
+                    fileRemover(entry);
+                }
+            }
+		}
+	}
+	catch (...) {
+		std::cout << "Couldn't find: " << fs::path(map) << "\n" << std::endl;
+		return false;
+	}
+	return fs::remove(map);
+}
+
 int main(int argc, char** args){
     if(argc == 1){
         std::cout << "You have to enter a file.\n";
         exit(0);
     }
-    for(int i = 1; i < argc;i++){
-        if(std::filesystem::is_directory(args[i])){
-            try{
-                std::filesystem::remove_all(args[i]);
-                std::filesystem::remove(args[i]);
-                std::cout << "Succesfully deleted directory: " << args[i] << std::endl;
-            }catch(...){
-                std::cout << "Couldn't delete directory: " << args[i] << std::endl;
-            }
+    for(int i = 1;i < argc;i++){
+        clock_t start = clock();
+        if(fileRemover(fs::directory_entry(args[i]))){
+            std::cout << "Succesfully deleted " << args[i] << std::endl;
         }else{
-            try{
-                std::filesystem::remove(args[i]);
-                std::cout << "Succesfully deleted file: " << args[i] << std::endl;
-            }catch(...){
-                std::cout << "Couldn't delete file " << args[i] << std::endl;
-            }
+            std::cout << "Couldn't delete " << args[i] << std::endl;
         }
     }
 }

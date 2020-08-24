@@ -1,0 +1,7 @@
+ga naar de folder waar de te verwijderen map of bestand in zit
+open cmd in die map
+typ "fileRemover " + de volledige naam van de te verwijderen map in
+druk op enter
+programma start en verwijdert de gekozen map of bestand
+
+je kan meerdere bestanden en mappen tegelijk verwijderen

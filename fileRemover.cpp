@@ -9,12 +9,16 @@ bool fileRemover(fs::directory_entry map) {
     }
 	try {
 		for (const fs::directory_entry& entry : fs::directory_iterator(map)) {
-			if (!entry.is_directory()) {
-                fs::remove(entry);
-			}else{
-                if(map != entry){
-                    fileRemover(entry);
+            try{
+                if (!entry.is_directory()) {
+                    fs::remove(entry);
+                }else{
+                    if(map != entry){
+                        fileRemover(entry);
+                    }
                 }
+            }catch(...){
+                std::cout << "Couldn't find or delete: " << fs::path(entry) << "\n" << std::endl;
             }
 		}
 	}

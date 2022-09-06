@@ -4,34 +4,27 @@
 namespace fs = std::filesystem;
 
 bool fileRemover(fs::directory_entry map) {
+    if(!map.exists()){
+        return false;
+    }
     if(!map.is_directory()){
         return fs::remove(map);
     }
-	try {
-		for (const fs::directory_entry& entry : fs::directory_iterator(map)) {
-            try{
-                if (!entry.is_directory()) {
-                    fs::remove(entry);
-                }else{
-                    if(map != entry){
-                        fileRemover(entry);
-                    }
-                }
-            }catch(...){
-                std::cout << "Couldn't find or delete: " << fs::path(entry) << "\n" << std::endl;
+	for (const fs::directory_entry& entry : fs::directory_iterator(map)) {
+        if (!entry.is_directory()) {
+            fs::remove(entry);
+        }else{
+            if(map != entry){
+                fileRemover(entry);
             }
-		}
-	}
-	catch (...) {
-		std::cout << "Couldn't find: " << fs::path(map) << "\n" << std::endl;
-		return false;
+        }
 	}
 	return fs::remove(map);
 }
 
 int main(int argc, char** args){
     if(argc == 1){
-        std::cout << "You have to enter a file.\n";
+        std::cout << "usage: " << args[0] << " [directory/file names]\n";
         exit(0);
     }
     for(int i = 1;i < argc;i++){

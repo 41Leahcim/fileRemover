@@ -1,6 +1,0 @@
-als je command niet herkend wordt door cmd, controleer dan of je mijn programma succesvol geïnstalleerd hebt.
-als dat zo lijkt te zijn, stuur je een screenshot naar michael-scholten@hotmail.nl
-
-als het niet gelukt is om een bestand/map te verwijderen, controleer je of het geopend is en of de naam geopend is.
-
-als je probleem er niet tussen staat, stuur je een screenshot naat michael-scholten@hotmail.nl

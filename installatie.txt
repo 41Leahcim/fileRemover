@@ -1,7 +1,0 @@
-ga naar configuratiescherm
-ga naar Systeem
-ga naar geavanceerde systeeminstellingen
-ga naar omgevingsvariabelen
-selecteer Path en klik op bewerken
-klik op nieuw en plak de locatie van de fileRemover op de geselecteerde plek
-sluit path, omgevingsvariabelen en systeemeigenschappen door op ok te klikken
